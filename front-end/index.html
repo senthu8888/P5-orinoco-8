@@ -17,7 +17,7 @@
             <div class="principal_commerce">
                 <img class="cadre_head_commerce" src="/front-end/img/logo-orinoco.png" alt="OhMYFood" title="OhMYFood"/>
             </div>
-			<a href="panier.html"><i class="fas fa-shopping-basket"></i></a>
+			<a href="panier.html"><i class="fas fa-shopping-basket" title="Panier"></i></a>
         </div>
     </header>
 	<section id="mondial_commerce">
@@ -25,9 +25,12 @@
 			<h1>Bienvenue à ORINOCO<br>
 				Découverte des fameux produits d'exceptions</h1>
 			<div class="orders_items">
-				<button class="commande cam">Camera</button>
-				<button class="commande fur">Furniture</button>
-				<button class="commande ted">Teddy</button>
+					<a class="commande cam" onclick="hideCamera()">Camera</a>
+					<a class="commande fur" onclick="hideFurniture()">Furniture</a>
+					<a class="commande ted" onclick="hideTeddies()">Teddy</a>
+					<div id="cams"></div>
+					<div id="furs"></div>
+					<div id="bears"></div>
 			</div>
 		</div>
 	</section>

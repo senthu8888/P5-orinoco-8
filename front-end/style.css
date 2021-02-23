@@ -20,12 +20,24 @@ header {
 	margin: 45px 25px 45px 0;
 	font-size: 34px;
 	width: 100%;
-	color: black;
+	color: blueviolet;
+}
+
+.fa-arrow-left {
+	margin: 45px 0 45px 25px;
+	font-size: 34px;
+	width: 100%;
+	color: blueviolet;
 }
 
 .cadre_head_commerce {
 	margin-top: 8px;
 	margin-left: 30px;
+	width: 250px;
+}
+
+.cadre_head_produit {
+	margin-top: 8px;
 	width: 250px;
 }
 
@@ -81,10 +93,10 @@ footer {
 	text-decoration: none;
 }
 
-/*new*/
 .orders_items {
 	display: flex;
 	justify-content: space-evenly;
+	max-width: 1200px;
 	width: 100%;
 	align-content: center;
 	margin-top: 45px;
@@ -134,10 +146,10 @@ footer {
 #mondial_commerce {
 	display: flex;
 	flex-wrap: wrap;
-	background-color: #f3e9f1;
+	background-color: skyblue;
 	background-image: url("/front-end/img/back-pic.jpg");
-	background-repeat: repeat-x;
-	background-size: cover;
+	background-size: 1435px 1000px;
+	background-blend-mode: darken;
 }
 
 #items_products {
@@ -148,9 +160,45 @@ footer {
 h1 {
 	font-size: 35px;
 	font-weight: 700;
-	text-shadow: 2px 4px 4px rgb(147 86 220);
+	text-shadow: 2px 4px 4px rgb(147, 86, 220);
 	color: #fff !important;
 	text-align: center;
+	font-family: cursive;
+}
+
+label {
+	font-weight: bold;
+	float: left;
+	margin-bottom: 15px;
+	width: auto;
+	margin-right: 10px;
+	font-size: 30px;
+	margin-top: 0px;
+	color: #fff;
+	font-family: cursive;
+}
+
+select {
+	font-size: 1.8em;
+	margin-top: 8px;
+	border-radius: 30px;
+}
+
+input {
+	font-size: 18px;
+	height: 30px;
+}
+button {
+	display: block;
+	background: white;
+	color: blueviolet;
+	text-transform: uppercase;
+	padding: 12px 28px 12px 28px;
+	font-size: 16px;
+	font-weight: bold;
+	border-radius: 40px;
+	margin: 30px 5px 5px 0;
+	width: 100%;
 	font-family: cursive;
 }
 
@@ -163,7 +211,6 @@ h1 {
 		margin-top: 45px;
 		margin-bottom: 45px;
 		flex-wrap: wrap;
-		flex-direction: column;
 	}
 
 	footer {
@@ -180,5 +227,152 @@ h1 {
 		text-shadow: 2px 2px 2px grey;
 		margin-right: 50px;
 		margin-left: 50px;
+	}
+
+	.fa-shopping-basket {
+		margin: 45px 10px 45px 0;
+		font-size: 34px;
+		width: 100%;
+		color: blueviolet;
+	}
+
+	.fa-arrow-left {
+		margin: 45px 0 45px 10px;
+		font-size: 34px;
+		width: 100%;
+		color: blueviolet;
+	}
+
+	.cadre_head_produit {
+		margin-top: 8px;
+		width: calc(100% - 55px);
+	}
+}
+
+#bears,
+#cams,
+#furs {
+	margin-top: 50px;
+	display: none;
+}
+
+h2 {
+	margin: auto 0 30px 0;
+	font-size: 75px;
+	font-weight: 700;
+	text-shadow: 2px 4px 4px rgb(147, 86, 220);
+	color: #fff !important;
+	text-align: center;
+	font-family: cursive;
+}
+h3 {
+	width: 100%;
+}
+
+#cadre-photo {
+	max-width: 300px;
+	height: 250px;
+	border-radius: 20%;
+}
+#bears article,
+#cams article,
+#furs article,
+#produit article {
+	margin: inherit;
+	padding: 30px 10px 30px 10px;
+	overflow-wrap: break-word;
+	text-align: center;
+}
+#link {
+	padding: 0 20px 0 20px;
+	background-color: #f3e9f1;
+	border-radius: 20px;
+	font-size: 20px;
+	font-weight: bold;
+	font-family: cursive;
+	text-decoration: none;
+}
+
+p {
+	margin-bottom: 15px;
+	font-size: 20px;
+	font-weight: bold;
+	font-family: cursive;
+}
+
+article {
+	padding: 20px 10px 20px 10px;
+	border: 4px solid #fff;
+	background-color: #f3e9;
+	border-radius: 70px;
+}
+
+#bears h3,
+#cams h3,
+#furs h3,
+#produit h3 {
+	width: auto;
+	margin-right: 10px;
+	font-size: 30px;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	color: #fff;
+	font-family: cursive;
+}
+
+@media only screen and (min-width: 800px) {
+	article {
+		margin: auto;
+	}
+	#bears article,
+	#cams article,
+	#furs article,
+	#produit article {
+		display: block;
+	}
+	#bears h3,
+	#cams h3,
+	#furs h3,
+	#produit h3 {
+		width: auto;
+		margin-right: 10px;
+		font-size: 30px;
+		margin-bottom: 0px;
+		margin-top: 0px;
+		color: #fff;
+		font-family: cursive;
+	}
+	#bears article img,
+	#cams article img,
+	#furs article img {
+		display: inline-block;
+		height: 330px;
+		width: auto;
+	}
+
+	#produit article img {
+		display: block;
+		height: 330px;
+		width: auto;
+		float: left;
+	}
+
+	#bears article div,
+	#cams article div,
+	#furs article div,
+	#produit article div {
+		display: inline-block;
+		text-align: left;
+	}
+
+	article {
+		display: flex;
+		align-items: center;
+	}
+	article div {
+		width: 50%;
+	}
+	#cadre-photo {
+		margin: auto 50px auto 50px;
 	}
 }
