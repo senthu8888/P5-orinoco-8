@@ -425,10 +425,15 @@ h3 {
 	text-align: center;
 }
 
-#items article,
 #basket article,
 #prixTotal article {
 	margin: 20px;
+	padding: 30px 10px 30px 10px;
+	overflow-wrap: break-word;
+	text-align: center;
+}
+
+#items article {
 	padding: 30px 10px 30px 10px;
 	overflow-wrap: break-word;
 	text-align: center;
@@ -560,6 +565,7 @@ label {
 	}
 	#items article {
 		display: block;
+		margin: 20px;
 	}
 
 	#basket article {
