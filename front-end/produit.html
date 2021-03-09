@@ -5,7 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content="Site e-commerce ORINOCO" />
 		<link rel="shortcut icon" type="img/jpg" href="/front-end/img/favicon.svg" />
-		<link rel="stylesheet" href="style.css" />
+		<link rel="stylesheet"  href="style.css" >
 		<link
 			href="https://fonts.googleapis.com/css?family=Coming+Soon&display=swap"
 			rel="stylesheet"
@@ -20,20 +20,19 @@
 				<div class="principal_commerce">
 					<img class="cadre_head_produit" src="/front-end/img/logo-orinoco.png" alt="OhMYFood" title="OhMYFood"/>
 				</div>
-				<a href="panier.html"><i class="fas fa-shopping-basket"></i></a>
+			<a class="panier" href='panier.html'><span class="totalProducts"></span><i class="fas fa-shopping-cart"></i></a>
+        </div>
 			</div>
 		</header>
 		<section id="mondial_commerce">
 			<div id="items_products">
 				<h1>Produit Sélectionner</h1>
 				<div class="orders_items">
-						<div id="produit"></div>
-						<div id="produitcams"></div>
-
+					<div id="items"></div>
 				</div>
 			</div>
 		</section>
-		
+
 		<footer>
 			<div class="foot">
 				<nav id="propos">
@@ -45,5 +44,7 @@
 				</nav>
 		 </footer>
 		<script src="produit.js"></script>
+		<script src="articles.js"></script>
 	</body>
+	
 </html>
