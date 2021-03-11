@@ -38,7 +38,5 @@ fetch("http://localhost:3000/api/teddies")
 			div.appendChild(description);
 			div.appendChild(link);
 			bears.appendChild(article);
-
-			console.log(teddy);
 		});
 	});

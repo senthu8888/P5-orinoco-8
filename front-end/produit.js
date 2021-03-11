@@ -1,18 +1,25 @@
 //récupération du ID du produit choisi
-let id = window.location.search.substring(4);
-
-let url = "http://localhost:3000/api/teddies/" + id;
+let setup = new URLSearchParams(window.location.search);
 let items = document.getElementById("items");
-let articlePage = async function () {
-	let response = await fetch(url);
-	let teddy;
-	teddy = await response.json().then((teddy) => {
+
+let teddy;
+
+fetch("http://localhost:3000/api/teddies/" + setup.get("id"))
+	.then((response) => {
+		console.log(response);
+		if (response.ok) {
+			return response.json();
+		} else {
+			throw Error(response.status);
+		}
+	})
+	.then((teddy) => {
+		console.log(teddy.id);
 		//mise en place de l'ensemble du produit
 		let article = document.createElement("article");
 		let image = document.createElement("img");
 		image.id = "cadre-photo-produit";
 		image.src = teddy.imageUrl;
-		console.log(id);
 		let div = document.createElement("div");
 		let name = document.createElement("h2");
 		name.textContent = teddy.name;
@@ -49,33 +56,33 @@ let articlePage = async function () {
 		//élément qui permet de stocké le produit choisi au panier
 		addBasket.addEventListener("click", function () {
 			alert("Vous avez ajouté " + teddy.name + " à votre panier");
-			ajoutLocalStorage();
+			addingStorage();
 			itemsProducts();
 			prixTotal();
 			function itemsProducts() {
-				let itemsProducts = localStorage.getItem("qté");
+				let itemsProducts = localStorage.getItem("qty");
 				itemsProducts = parseInt(itemsProducts);
 
 				if (itemsProducts) {
-					localStorage.setItem("qté", itemsProducts + 1);
+					localStorage.setItem("qty", itemsProducts + 1);
 					document.querySelector(".totalProducts").textContent = itemsProducts + 1;
 				} else {
-					localStorage.setItem("qté", 1);
+					localStorage.setItem("qty", 1);
 					document.querySelector(".totalProducts").textContent = 1;
 				}
 			}
 
-			function ajoutLocalStorage() {
+			function addingStorage() {
 				let panier = localStorage.getItem("panier");
 				panier = JSON.parse(panier);
 				if (panier != null) {
-					teddy.qté = 0;
+					teddy.qty = 0;
 					if (panier[teddy.name] === undefined) {
 						panier = { ...panier, [teddy.name]: teddy };
 					}
-					panier[teddy.name].qté += 1;
+					panier[teddy.name].qty += 1;
 				} else {
-					teddy.qté = 1;
+					teddy.qty = 1;
 					panier = { [teddy.name]: teddy };
 				}
 				localStorage.setItem("panier", JSON.stringify(panier));
@@ -102,9 +109,3 @@ let articlePage = async function () {
 		div.appendChild(color);
 		div.appendChild(addBasket);
 	});
-};
-
-//élément qui permet d'afficher le produit
-window.onload = () => {
-	articlePage();
-};
