@@ -274,6 +274,8 @@ function orderSend(objt) {
 			sessionStorage.setItem("prix", JSON.stringify(prix));
 			sessionStorage.removeItem("anyItem");
 			window.location.href = "commande.html";
+
+			console.log(order);
 		})
 		.catch(() => {
 			return alert("Erreur de la commande");

@@ -14,12 +14,11 @@ productContain = `
 
 document.getElementById("conform").innerHTML = productContain;
 
-sessionStorage.removeItem("prix");
-sessionStorage.removeItem("orderId");
-sessionStorage.removeItem("contact");
-
 let backMenu = document.getElementById("retour");
 backMenu.addEventListener("click", function () {
 	localStorage.clear();
 	window.location.reload();
+	sessionStorage.removeItem("prix");
+	sessionStorage.removeItem("orderId");
+	sessionStorage.removeItem("contact");
 });
