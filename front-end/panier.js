@@ -16,16 +16,6 @@ function displayBasket() {
 	let totalBasket = localStorage.getItem("prixTotal");
 	let prixPanier = document.getElementById("totalpanier");
 
-	if (totalBasket != 0) {
-		prixPanier.textContent = "Total achat : " + totalBasket / 100 + " €";
-		prixPanier.id = "prixTotal";
-	} else {
-		prixPanier.textContent = "Total achat : " + 0 + " €";
-		alert("Votre panier est vide");
-		localStorage.clear();
-		window.location.reload();
-	}
-
 	// affiche l'élément du panier et panier vide
 	let productContain = document.getElementById("basket");
 
@@ -34,6 +24,9 @@ function displayBasket() {
 		div.id = "paniervide";
 		let name = document.createElement("h2");
 		name.textContent = " Panier vide ";
+		prixPanier.textContent = "Total achat : " + 0 + " €";
+		alert("Votre panier est vide");
+		localStorage.clear();
 		basket.appendChild(div);
 		div.appendChild(name);
 	} else {
@@ -42,6 +35,8 @@ function displayBasket() {
 		div.id = "panierfull";
 		let name = document.createElement("h2");
 		name.textContent = " Votre Panier ";
+		prixPanier.textContent = "Total achat : " + totalBasket / 100 + " €";
+		prixPanier.id = "prixTotal";
 		basket.appendChild(div);
 		div.appendChild(name);
 
@@ -67,87 +62,6 @@ function displayBasket() {
 			buttonMore = document.createElement("button");
 			buttonMore.textContent = "+";
 			buttonMore.id = "buttonMore";
-
-			buttonMore.addEventListener("click", function () {
-				addLocalStorage();
-				itemsProducts();
-				prixTotal();
-				function itemsProducts() {
-					let itemsProducts = localStorage.getItem("qty");
-					itemsProducts = parseInt(itemsProducts);
-
-					if (itemsProducts) {
-						localStorage.setItem("qty", itemsProducts + 1);
-						document.querySelector(".totalProducts").textContent = itemsProducts + 1;
-						(teddy.price / 100) * teddy.qty + " €";
-						window.location.reload();
-					} else {
-						localStorage.setItem("qty", 1);
-						document.querySelector(".totalProducts").textContent = 1;
-					}
-				}
-
-				function addLocalStorage() {
-					let panier = localStorage.getItem("panier");
-					panier = JSON.parse(panier);
-					if (panier != null) {
-						if (panier[teddy.name] === undefined) {
-							panier = { ...panier, [teddy.name]: teddy };
-						}
-						panier[teddy.name].qty += 1;
-					} else {
-						panier = { [teddy.name]: teddy };
-					}
-					localStorage.setItem("panier", JSON.stringify(panier));
-				}
-				function prixTotal() {
-					let price = parseInt(teddy.price);
-					let priceBasket = JSON.parse(localStorage.getItem("prixTotal")) || 0;
-
-					localStorage.setItem("prixTotal", priceBasket + price);
-				}
-			});
-
-			buttonLess.addEventListener("click", function () {
-				removeLocalStorage();
-				itemsProducts();
-				prixTotal();
-				function itemsProducts() {
-					let itemsProducts = localStorage.getItem("qty");
-					itemsProducts = parseInt(itemsProducts);
-
-					if (itemsProducts) {
-						localStorage.setItem("qty", itemsProducts - 1);
-						document.querySelector(".totalProducts").textContent = itemsProducts - 1;
-						(teddy.price / 100) * teddy.qty + " €";
-						window.location.reload();
-					} else {
-						localStorage.setItem("qty", 0);
-						document.querySelector(".totalProducts").textContent = 0;
-					}
-				}
-
-				function removeLocalStorage() {
-					let panier = localStorage.getItem("panier");
-					panier = JSON.parse(panier);
-					if (panier != null) {
-						if (panier[teddy.name] === undefined) {
-							panier = { ...panier, [teddy.name]: teddy };
-						}
-						panier[teddy.name].qty -= 1;
-					} else {
-						panier = { [teddy.name]: teddy };
-					}
-					localStorage.setItem("panier", JSON.stringify(panier));
-				}
-				function prixTotal() {
-					let price = parseInt(teddy.price);
-					let priceBasket = JSON.parse(localStorage.getItem("prixTotal")) || 0;
-
-					localStorage.setItem("prixTotal", priceBasket - price);
-				}
-			});
-
 			let prix = document.createElement("h3");
 			prix.textContent = "Prix: ";
 			let price = document.createElement("p");
@@ -162,6 +76,63 @@ function displayBasket() {
 			let supprimerProduit = document.createElement("button");
 			supprimerProduit.textContent = "supprimer le produit";
 			supprimerProduit.id = "supprimerProduit";
+
+			buttonMore.addEventListener("click", function () {
+				addLocalStorage();
+				itemsProducts();
+				prixTotal();
+				function itemsProducts() {
+					let itemsProducts = localStorage.getItem("qty");
+					itemsProducts = parseInt(itemsProducts);
+
+					localStorage.setItem("qty", itemsProducts + 1);
+					document.querySelector(".totalProducts").textContent = itemsProducts + 1;
+					(teddy.price / 100) * teddy.qty + " €";
+					window.location.reload();
+				}
+
+				function addLocalStorage() {
+					let cart = JSON.parse(localStorage.getItem("panier"));
+					cart[teddy.name].qty += 1;
+					localStorage.setItem("panier", JSON.stringify(cart));
+				}
+				function prixTotal() {
+					let price = parseInt(teddy.price);
+					let priceBasket = JSON.parse(localStorage.getItem("prixTotal"));
+					localStorage.setItem("prixTotal", priceBasket + price);
+				}
+			});
+
+			buttonLess.addEventListener("click", function () {
+				itemsProducts();
+				removeLocalStorage();
+				prixTotal();
+				function itemsProducts() {
+					let itemsProducts = localStorage.getItem("qty");
+					itemsProducts = parseInt(itemsProducts);
+
+					localStorage.setItem("qty", itemsProducts - 1);
+					document.querySelector(".totalProducts").textContent = itemsProducts - 1;
+					(teddy.price / 100) * teddy.qty + " €";
+					window.location.reload();
+				}
+
+				function removeLocalStorage() {
+					let cart = JSON.parse(localStorage.getItem("panier"));
+					if (cart[teddy.name].qty != 1) {
+						cart[teddy.name].qty -= 1;
+					} else {
+						alert("Vous avez supprimé " + teddy.name + " de votre panier ! ");
+						delete cart[teddy.name];
+					}
+					localStorage.setItem("panier", JSON.stringify(cart));
+				}
+				function prixTotal() {
+					let price = parseInt(teddy.price);
+					let priceBasket = JSON.parse(localStorage.getItem("prixTotal"));
+					localStorage.setItem("prixTotal", priceBasket - price);
+				}
+			});
 
 			basket.appendChild(article);
 			article.appendChild(image);
@@ -188,11 +159,11 @@ function deleteButtons() {
 	let deleteButtons = document.querySelectorAll("#supprimerProduit");
 	let itemName;
 	let prixTotal = localStorage.getItem("prixTotal");
-	let article = localStorage.getItem("panier");
-	article = JSON.parse(article);
+	let article = JSON.parse(localStorage.getItem("panier"));
 
 	console.log(article);
 
+	let qty;
 	let itemsProducts = localStorage.getItem("qty");
 	itemsProducts = parseInt(itemsProducts);
 
@@ -205,20 +176,17 @@ function deleteButtons() {
 				prixTotal - article[itemName].price * article[itemName].qty
 			);
 
+			qty = deleteButtons[i].parentElement.firstChild.textContent;
+			console.log(qty);
+			localStorage.setItem("qty", itemsProducts - article[qty].qty);
+
 			alert("Vous avez supprimé " + itemName + " de votre panier ! ");
 			delete article[itemName];
+			delete article[qty];
 			localStorage.setItem("panier", JSON.stringify(article));
 			window.location.reload();
-			if (itemsProducts != 0) {
-				localStorage.setItem("qty", itemsProducts - 1);
-				document.querySelector(".totalProducts").textContent = itemsProducts - 1;
-			} else {
-				localStorage.setItem("qty", 0);
-				document.querySelector(".totalProducts").textContent = 0;
-			}
 
 			displayBasket();
-			fillBasket();
 		});
 	}
 }
@@ -240,13 +208,16 @@ function achat() {
 	};
 
 	let products = [];
-	if (sessionStorage.getItem("anyItem") !== null) {
-		let productTab = JSON.parse(sessionStorage.getItem("anyItem"));
-
-		productTab.forEach((p) => {
-			products.push(p.id);
-		});
+	function productId() {
+		let products = sessionStorage.getItem("panier");
+		if (products != null) {
+			Object.values(products).map((p) => {
+				products = p.id;
+			});
+		}
 	}
+	productId();
+	console.log(products);
 
 	let objt = JSON.stringify({
 		contact,
@@ -272,7 +243,7 @@ function orderSend(objt) {
 			let prix = localStorage.getItem("prixTotal");
 			prix = JSON.parse(prix);
 			sessionStorage.setItem("prix", JSON.stringify(prix));
-			sessionStorage.removeItem("anyItem");
+			sessionStorage.removeItem("panier");
 			window.location.href = "commande.html";
 
 			console.log(order);

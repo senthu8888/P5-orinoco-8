@@ -5,7 +5,7 @@ let prix = JSON.parse(sessionStorage.getItem("prix"));
 let productContain = "";
 
 productContain = `
-<p class="commandetext">${contact.firstName} ${contact.lastName}</p>
+<p class="commandetext">${contact.firstName} ${contact.lastName}</p><br>
 <p class="commandetext">Votre commande a été enregistrée sous le numéro :  ${orderId}</p>
         <p class="commandetext">montant total de ${prix / 100} €</p>
         <p class="commandetext">Merci pour votre commande</p>

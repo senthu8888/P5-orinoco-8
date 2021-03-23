@@ -1,6 +1,6 @@
 let bears = document.getElementById("bears");
 
-//Affichage du produit
+//Affichage du produit sur la page du site
 fetch("http://localhost:3000/api/teddies")
 	.then((response) => response.json())
 	.then((teddies) => {
@@ -25,7 +25,7 @@ fetch("http://localhost:3000/api/teddies")
 			description.textContent = teddy.description;
 
 			let link = document.createElement("a");
-			link.id = "link";
+			link.className = "link";
 			link.href = "produit.html?id=" + teddy._id;
 			link.textContent = "Acheter";
 

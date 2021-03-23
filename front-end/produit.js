@@ -59,6 +59,22 @@ fetch("http://localhost:3000/api/teddies/" + setup.get("id"))
 			addingStorage();
 			itemsProducts();
 			prixTotal();
+
+			function addingStorage() {
+				let cart = JSON.parse(localStorage.getItem("panier"));
+				if (cart != null) {
+					teddy.qty = 0;
+					if (cart[teddy.name] === undefined) {
+						cart = { ...cart, [teddy.name]: teddy };
+					}
+					cart[teddy.name].qty += 1;
+				} else {
+					teddy.qty = 1;
+					cart = { [teddy.name]: teddy };
+				}
+				localStorage.setItem("panier", JSON.stringify(cart));
+			}
+
 			function itemsProducts() {
 				let itemsProducts = localStorage.getItem("qty");
 				itemsProducts = parseInt(itemsProducts);
@@ -72,21 +88,6 @@ fetch("http://localhost:3000/api/teddies/" + setup.get("id"))
 				}
 			}
 
-			function addingStorage() {
-				let panier = localStorage.getItem("panier");
-				panier = JSON.parse(panier);
-				if (panier != null) {
-					teddy.qty = 0;
-					if (panier[teddy.name] === undefined) {
-						panier = { ...panier, [teddy.name]: teddy };
-					}
-					panier[teddy.name].qty += 1;
-				} else {
-					teddy.qty = 1;
-					panier = { [teddy.name]: teddy };
-				}
-				localStorage.setItem("panier", JSON.stringify(panier));
-			}
 			function prixTotal() {
 				let price = parseInt(teddy.price);
 				let priceBasket = JSON.parse(localStorage.getItem("prixTotal")) || 0;
