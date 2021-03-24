@@ -247,8 +247,5 @@ function orderSend(objt) {
 			window.location.href = "commande.html";
 
 			console.log(order);
-		})
-		.catch(() => {
-			return alert("Erreur de la commande");
 		});
 }

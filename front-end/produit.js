@@ -14,7 +14,7 @@ fetch("http://localhost:3000/api/teddies/" + setup.get("id"))
 		}
 	})
 	.then((teddy) => {
-		console.log(teddy.id);
+		console.log(teddy._id);
 		//mise en place de l'ensemble du produit
 		let article = document.createElement("article");
 		let image = document.createElement("img");
