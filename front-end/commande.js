@@ -22,3 +22,11 @@ backMenu.addEventListener("click", function () {
 	sessionStorage.removeItem("orderId");
 	sessionStorage.removeItem("contact");
 });
+
+// var quit = false;
+// window.onbeforeunload = function () {
+// 	if (quit == false) {
+// 		return false;
+// 	}
+// 	window.location.href = "index.html";
+// };

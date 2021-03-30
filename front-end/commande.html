@@ -12,6 +12,12 @@
 		/>
 		<script defer src="https://use.fontawesome.com/releases/v5.15.1/js/all.js"></script>
 		<title>ORINOCO - Validation Commande</title>
+		<script>
+			history.pushState(null, null, location.href);
+			window.onpopstate = function () {
+				history.go(1);
+			};
+		</script>
 	</head>
 
 	<body>
